@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/item_feed_horizontal_margin"
+		android:layout_marginStart="@dimen/item_feed_horizontal_margin"
+		android:background="@color/white"
+		android:orientation="vertical"
+		>
+
+	<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/itemFeedTvPostedBy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textColor="@color/black_opacity_50"
+			android:textSize="@dimen/item_feed_tv_author_size"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:text="Posted by u/AllahAllahovich 14:88 h ago"
+			/>
+
+	<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/itemFeedTvTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/placeholder_no_title"
+			android:textColor="@color/black"
+			android:textSize="@dimen/item_feed_tv_title_size"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/itemFeedTvPostedBy"
+			tools:text="Как мы с пацанами щукаря с моста прыгали..."
+			/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

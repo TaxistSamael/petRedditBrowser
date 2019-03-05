@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycler_padding">20dp</dimen>
+	<dimen name="item_feed_horizontal_margin">20dp</dimen>
+	<dimen name="item_feed_tv_title_size">19sp</dimen>
+	<dimen name="item_feed_tv_author_size">14sp</dimen>
+</resources>

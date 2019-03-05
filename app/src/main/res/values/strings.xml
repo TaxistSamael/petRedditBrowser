@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Reddit Feed</string>
+    <string name="feed_placeholder">Ooops! Something went wrong. \nTap to retry!</string>
+	<string name="placeholder_no_title">No title</string>
+</resources>
