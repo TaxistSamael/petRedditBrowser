@@ -1,5 +1,21 @@
 <resources>
-    <string name="app_name">Reddit Feed</string>
-    <string name="feed_placeholder">Ooops! Something went wrong. \nTap to retry!</string>
+	<!--todo: remove unused resources-->
+	<string name="app_name">Reddit Feed</string>
+	<string name="feed_placeholder">Ooops! Something went wrong. \nTap to retry!</string>
 	<string name="placeholder_no_title">No title</string>
+
+	<string name="format_time_left">%1$sh %2$sm ago</string>
+	<string name="format_days_left">%1$s ago</string>
+
+	<string name="format_user_posted">Posted by \\u %1$s</string>
+	<string name="cooldown_days">%s d</string>
+	<string name="cooldown_hours">%1$s h</string>
+	<string name="cooldown_minutes">%s m</string>
+
+	<plurals name="days_plurals">
+		<item quantity="one">%d day</item>
+		<item quantity="few">%d days</item>
+		<item quantity="many">%d days</item>
+		<item quantity="other">%d days</item>
+	</plurals>
 </resources>

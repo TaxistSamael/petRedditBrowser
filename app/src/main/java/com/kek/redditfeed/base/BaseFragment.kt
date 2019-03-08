@@ -9,20 +9,13 @@ abstract class BaseFragment : MvpAppCompatFragment() {
 
   abstract val layoutRes: Int
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    injectDaggerDependency()
+    super.onCreate(savedInstanceState)
+  }
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
     inflater.inflate(layoutRes, container, false)
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    injectDaggerDependency()
-    super.onActivityCreated(savedInstanceState)
-  }
-
-  override fun onDestroy() {
-    removeDaggerDependency()
-    super.onDestroy()
-  }
-
   abstract fun injectDaggerDependency()
-
-  open fun removeDaggerDependency() {} //do we need it???
 }

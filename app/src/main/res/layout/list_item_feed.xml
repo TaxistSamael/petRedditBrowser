@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--TODO: check layout on different gadjets, emulators-->
+<androidx.constraintlayout.widget.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
@@ -7,6 +9,7 @@
 		android:layout_marginEnd="@dimen/item_feed_horizontal_margin"
 		android:layout_marginStart="@dimen/item_feed_horizontal_margin"
 		android:background="@color/white"
+		android:elevation="@dimen/item_feed_elevation"
 		android:orientation="vertical"
 		>
 
@@ -27,12 +30,41 @@
 			android:id="@+id/itemFeedTvTitle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/item_feed_tv_title_margin_top"
 			android:text="@string/placeholder_no_title"
 			android:textColor="@color/black"
 			android:textSize="@dimen/item_feed_tv_title_size"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/itemFeedTvPostedBy"
 			tools:text="Как мы с пацанами щукаря с моста прыгали..."
+			/>
+
+	<!--todo: think what i can make with that image-->
+	<!--todo: dimens, sizes, aspect ratio-->
+	<com.facebook.drawee.view.SimpleDraweeView
+			android:id="@+id/itemFeedIv"
+			android:layout_width="140dp"
+			android:layout_height="70dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/itemFeedTvTitle"
+			app:placeholderImage="@drawable/ic_placeholder"
+			app:placeholderImageScaleType="fitCenter"
+			tools:background="@android:color/background_dark"
+			/>
+
+	<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/itemFeedTvComments"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/item_feed_tv_comments_margin_top"
+			android:drawablePadding="@dimen/item_feed_tv_comments_drawable_padding"
+			android:drawableStart="@drawable/ic_comments"
+			android:includeFontPadding="false"
+			android:textColor="@color/black_opacity_50"
+			android:textSize="@dimen/item_feed_comments_text_size"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/itemFeedIv"
+			tools:text="Comments"
 			/>
 
 

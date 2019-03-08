@@ -9,7 +9,7 @@ abstract class SingleUseCase<T, in Params> {
 
   protected abstract fun buildSingleUseCase(params: Params): Single<T>
 
-  fun execute(params: Params, onSuccess: (T) -> Unit, onFailure: (Throwable) -> Unit): Disposable {
+  fun executeWithSubscription(params: Params, onSuccess: (T) -> Unit, onFailure: (Throwable) -> Unit): Disposable {
     return buildSingleUseCase(params)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
@@ -18,5 +18,11 @@ abstract class SingleUseCase<T, in Params> {
       }, {
         onFailure(it)
       })
+  }
+
+  fun execute(params: Params): Single<T> {
+    return buildSingleUseCase(params)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
   }
 }

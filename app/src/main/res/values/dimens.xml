@@ -4,4 +4,9 @@
 	<dimen name="item_feed_horizontal_margin">20dp</dimen>
 	<dimen name="item_feed_tv_title_size">19sp</dimen>
 	<dimen name="item_feed_tv_author_size">14sp</dimen>
+	<dimen name="item_feed_tv_title_margin_top">12dp</dimen>
+	<dimen name="item_feed_elevation">5dp</dimen>
+	<dimen name="item_feed_comments_text_size">18sp</dimen>
+	<dimen name="item_feed_tv_comments_drawable_padding">5dp</dimen>
+	<dimen name="item_feed_tv_comments_margin_top">12dp</dimen>
 </resources>

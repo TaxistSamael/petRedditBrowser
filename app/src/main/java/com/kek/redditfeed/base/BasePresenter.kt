@@ -6,9 +6,9 @@ import io.reactivex.disposables.CompositeDisposable
 
 open class BasePresenter<V : MvpView> : MvpPresenter<V>() {
 
-  val compositeDisposable = CompositeDisposable()
+  val disposables = CompositeDisposable()
 
   override fun onDestroy() {
-    compositeDisposable.dispose()
+    disposables.clear()
   }
 }
