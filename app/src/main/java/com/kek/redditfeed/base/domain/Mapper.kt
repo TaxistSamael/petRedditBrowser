@@ -1,4 +1,4 @@
-package com.kek.redditfeed.base
+package com.kek.redditfeed.base.domain
 
 import java.util.ArrayList
 

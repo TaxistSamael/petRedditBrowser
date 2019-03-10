@@ -1,4 +1,4 @@
-package com.kek.redditfeed.base
+package com.kek.redditfeed.base.presentation
 
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView

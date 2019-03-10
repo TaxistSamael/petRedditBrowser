@@ -16,7 +16,7 @@ class FeedAdapter @Inject constructor() : RecyclerView.Adapter<FeedListItem>() {
   private val dataSet = mutableListOf<FeedPostViewModel>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedListItem =
-    FeedListItem(parent)
+    FeedListItem(parent, thumbnailClickCallback)
 
   override fun getItemCount(): Int = dataSet.size
 

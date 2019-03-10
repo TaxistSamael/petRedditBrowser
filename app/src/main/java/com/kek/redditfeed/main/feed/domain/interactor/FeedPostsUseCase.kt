@@ -1,8 +1,8 @@
 package com.kek.redditfeed.main.feed.domain.interactor
 
-import com.kek.redditfeed.base.SingleUseCase
+import com.kek.redditfeed.base.domain.SingleUseCase
 import com.kek.redditfeed.main.feed.domain.repository.FeedRepository
-import com.kek.redditfeed.main.feed.presentation.mapper.FeedPostListViewModelMapper
+import com.kek.redditfeed.main.feed.domain.mapper.FeedPostListViewModelMapper
 import com.kek.redditfeed.main.feed.presentation.model.FeedPostListViewModel
 import io.reactivex.Single
 import javax.inject.Inject

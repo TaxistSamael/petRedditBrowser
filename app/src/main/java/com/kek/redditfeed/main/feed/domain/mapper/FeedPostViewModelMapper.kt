@@ -1,6 +1,6 @@
-package com.kek.redditfeed.main.feed.presentation.mapper
+package com.kek.redditfeed.main.feed.domain.mapper
 
-import com.kek.redditfeed.base.Mapper
+import com.kek.redditfeed.base.domain.Mapper
 import com.kek.redditfeed.main.feed.domain.model.FeedPost
 import com.kek.redditfeed.main.feed.presentation.model.FeedPostViewModel
 import javax.inject.Inject

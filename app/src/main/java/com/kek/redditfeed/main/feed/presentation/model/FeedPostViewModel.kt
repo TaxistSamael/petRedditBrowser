@@ -1,7 +1,9 @@
 package com.kek.redditfeed.main.feed.presentation.model
 
 import android.content.Context
+import android.os.Parcelable
 import com.kek.redditfeed.R
+import kotlinx.android.parcel.Parcelize
 import java.util.concurrent.TimeUnit
 
 //todo: вынести логику конвертации в отдельный файл
@@ -13,6 +15,7 @@ private const val DURATION_SEPARATOR = " "
 private const val ONE_MINUTE_STUB = 1L
 private const val EMPTY_STRING = ""
 
+@Parcelize
 class FeedPostViewModel(
     val id: String = "",
     val title: String = "",
@@ -21,7 +24,7 @@ class FeedPostViewModel(
     val numComments: Int = 0,
     val url: String = "",
     val thumbnail: String = ""
-) {
+) : Parcelable {
 
   fun getAuthorTimeString(context: Context): String {
     val milliseconds = TimeUnit.SECONDS.toMillis(createdUtc)

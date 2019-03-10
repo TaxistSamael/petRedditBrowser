@@ -1,4 +1,4 @@
-package com.kek.redditfeed.base
+package com.kek.redditfeed.base.domain
 
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

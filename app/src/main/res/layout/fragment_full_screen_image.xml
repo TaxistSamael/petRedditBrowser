@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--todo: dimens-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/white"
+		android:orientation="vertical"
+		>
+
+	<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/fullScreenIv"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:transitionName="kek"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:background="@android:color/holo_blue_light"
+			/>
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="56dp"
+			android:background="@color/black_opacity_50"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			/>
+
+	<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/fullScreenBtnBack"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			android:padding="16dp"
+			android:src="@drawable/ic_arrow_back_white"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			/>
+
+	<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/fullScreenBtnDownload"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			android:padding="16dp"
+			android:src="@drawable/ic_download"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			/>
+
+	<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/fullScreenTvTitle"
+			android:layout_width="0dp"
+			android:layout_height="56dp"
+			android:ellipsize="end"
+			android:gravity="center"
+			android:maxLines="1"
+			android:textColor="@color/white"
+			android:textSize="16sp"
+			android:layout_marginStart="12dp"
+			android:layout_marginEnd="12dp"
+			app:layout_constraintEnd_toStartOf="@id/fullScreenBtnDownload"
+			app:layout_constraintStart_toEndOf="@id/fullScreenBtnBack"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:text="We are jolly green giants, walking the Earth — with guns."
+			/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

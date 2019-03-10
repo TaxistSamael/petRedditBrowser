@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--TODO: check layout on different gadjets, emulators-->
+<!--todo: dimens, aspect ratio, crop-->
 <androidx.constraintlayout.widget.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,6 +12,7 @@
 		android:background="@color/white"
 		android:elevation="@dimen/item_feed_elevation"
 		android:orientation="vertical"
+		android:clipChildren="false"
 		>
 
 	<androidx.appcompat.widget.AppCompatTextView
@@ -39,16 +41,14 @@
 			tools:text="Как мы с пацанами щукаря с моста прыгали..."
 			/>
 
-	<!--todo: think what i can make with that image-->
-	<!--todo: dimens, sizes, aspect ratio-->
-	<com.facebook.drawee.view.SimpleDraweeView
+	<!--app:placeholderImage="@drawable/ic_placeholder"-->
+	<!--app:placeholderImageScaleType="fitCenter"-->
+	<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/itemFeedIv"
 			android:layout_width="140dp"
 			android:layout_height="70dp"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/itemFeedTvTitle"
-			app:placeholderImage="@drawable/ic_placeholder"
-			app:placeholderImageScaleType="fitCenter"
 			tools:background="@android:color/background_dark"
 			/>
 

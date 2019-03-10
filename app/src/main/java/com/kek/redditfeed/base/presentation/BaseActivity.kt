@@ -1,4 +1,4 @@
-package com.kek.redditfeed.base
+package com.kek.redditfeed.base.presentation
 
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity

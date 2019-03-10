@@ -1,28 +1,39 @@
 package com.kek.redditfeed.main.feed.presentation.view.feed
 
 import android.os.Bundle
-import android.widget.Toast
+import android.transition.TransitionInflater
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.kek.redditfeed.App.Companion.appComponent
-import com.kek.redditfeed.base.BaseFragment
+import com.kek.redditfeed.R
+import com.kek.redditfeed.base.presentation.BaseFragment
 import com.kek.redditfeed.main.feed.di.DaggerFeedComponent
 import com.kek.redditfeed.main.feed.presentation.model.FeedPostViewModel
 import com.kek.redditfeed.main.feed.presentation.view.feed.list.FeedAdapter
 import com.kek.redditfeed.main.feed.presentation.view.feed.list.FeedListItem
+import com.kek.redditfeed.main.full_screen_image.FullScreenImageFragment
+import com.kek.redditfeed.main.main.presentation.LIST_POSITION_NOT_INITIALIZED
+import com.kek.redditfeed.main.main.presentation.clickedItemCurrentPosition
+import com.kek.redditfeed.main.main.presentation.listOffset
+import com.kek.redditfeed.main.main.presentation.listPosition
 import com.kek.redditfeed.utils.doOnNextPage
 import com.kek.redditfeed.utils.onClick
 import kotlinx.android.synthetic.main.fragment_feed.*
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 //todo: test placeholder logic
-//todo: test main logic
 //todo: make loader logic
-//todo: do new fragment logic
-//todo: fix bug with swipe refresh and saving cursor
 //todo: сделать иконку плейсхолдера крупнее
-//todo: remove view binding if no need in it
+private const val LIST_POSITION = "list_position"
+private const val LIST_OFFSET = "list_offset"
+
 class FeedFragment : BaseFragment(), FeedView {
 
   override val layoutRes = com.kek.redditfeed.R.layout.fragment_feed
@@ -37,14 +48,72 @@ class FeedFragment : BaseFragment(), FeedView {
   @ProvidePresenter
   fun providePresenter(): FeedPresenter = presenter
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    handleBack()
+  }
+
+  private fun handleBack() {
+    if (listPosition == LIST_POSITION_NOT_INITIALIZED) return
+    feedRv.doOnLayout {
+      if (feedRv == null) return@doOnLayout //todo: is it possible?
+      feedRv.post {
+        (feedRv.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(listPosition, listOffset)
+      }
+    }
+  }
+
+  private fun saveScrollPosition(outState: Bundle) {
+    if (feedRv == null) return
+    val positionIndex = (feedRv.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: return
+    val startView = feedRv.getChildAt(0)
+    val topView = if (startView == null) 0 else startView.top - feedRv.paddingTop
+    outState.putInt(LIST_POSITION, positionIndex)
+    outState.putInt(LIST_OFFSET, topView)
+  }
+
+  private fun saveScrollPositionGlobally() {
+    if (feedRv == null) return
+    val positionIndex = (feedRv.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: return
+    val startView = feedRv.getChildAt(0)
+    val topView = if (startView == null) 0 else startView.top - feedRv.paddingTop
+
+    listPosition = positionIndex
+    listOffset = topView
+  }
+
+  private fun restoreScrollPosition(savedInstanceState: Bundle?) {
+    if (feedRv == null) return
+    val positionIndex = savedInstanceState?.getInt(LIST_POSITION) ?: 0
+    val topView = savedInstanceState?.getInt(LIST_OFFSET) ?: 0
+    if (positionIndex == -1) return
+    feedRv.post {
+      (feedRv.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(positionIndex, topView)
+    }
+  }
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    setExitTransition()
+    postponeEnterTransition()
+    return super.onCreateView(inflater, container, savedInstanceState)
+  }
+
+  private fun setExitTransition() {
+    exitTransition = TransitionInflater.from(context)
+      .inflateTransition(R.transition.grid_exit_transition)
+  }
+
+
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     saveScrollPosition(outState)
+    Log.d("droch", "saveInstanceState")
   }
 
   override fun onViewStateRestored(savedInstanceState: Bundle?) {
     super.onViewStateRestored(savedInstanceState)
     restoreScrollPosition(savedInstanceState)
+    Log.d("droch", "onViewStateRestored")
   }
 
   override fun initRecyclerView() {
@@ -58,8 +127,8 @@ class FeedFragment : BaseFragment(), FeedView {
     }
   }
 
+  //todo: handle placeholder logic
   override fun initListeners() {
-    //todo: set action with debounce
     feedPlaceholderTv.onClick { }
     feedSwipeRefresh.setOnRefreshListener { presenter.getPosts() }
   }
@@ -97,26 +166,26 @@ class FeedFragment : BaseFragment(), FeedView {
   }
 
   private val thumbnailClickCallback = object : FeedListItem.Callback {
-    override fun onThumbnailClicked(post: FeedPostViewModel) {
-      Toast.makeText(this@FeedFragment.context, "OLOLO", Toast.LENGTH_SHORT).show()
-      //todo
+    override fun onLoadCompleted(adapterPosition: Int, enterTransitionStarted: AtomicBoolean, position: Int) {
+      if (clickedItemCurrentPosition != position) return
+      if (enterTransitionStarted.getAndSet(true)) return
+      startPostponedEnterTransition()
     }
-  }
 
-  private fun saveScrollPosition(outState: Bundle) {
-    val positionIndex = (feedRv.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: return
-    val startView = feedRv.getChildAt(0)
-    val topView = if (startView == null) 0 else startView.top - feedRv.paddingTop
-    outState.putInt("kek", positionIndex)
-    outState.putInt("lol", topView)
-  }
+    override fun onThumbnailClicked(post: FeedPostViewModel, transitioningView: View) {
+      startPostponedEnterTransition()
 
-  private fun restoreScrollPosition(savedInstanceState: Bundle?) {
-    val positionIndex = savedInstanceState?.getInt("kek") ?: 0
-    val topView = savedInstanceState?.getInt("lol") ?: 0
-    if (positionIndex == -1) return
-    feedRv.post {
-      (feedRv.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(positionIndex, topView)
+      saveScrollPositionGlobally()
+
+      fragmentManager?.apply {
+        beginTransaction()
+          .setReorderingAllowed(true)
+          .addSharedElement(transitioningView, transitioningView.transitionName)
+          .replace(R.id.fragment_container, FullScreenImageFragment.newInstance(post), "FullScreenImageFragment")
+          .addToBackStack(null)
+          .commit()
+      }
+
     }
   }
 }

@@ -2,9 +2,9 @@ package com.kek.redditfeed.main.feed.presentation.view.feed
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.kek.redditfeed.base.BasePresenter
-import com.kek.redditfeed.base.Cursor
 import com.kek.redditfeed.base.di.scopes.PerFragment
+import com.kek.redditfeed.base.presentation.BasePresenter
+import com.kek.redditfeed.base.presentation.Cursor
 import com.kek.redditfeed.main.feed.domain.interactor.FeedPostsUseCase
 import io.reactivex.rxkotlin.plusAssign
 import javax.inject.Inject

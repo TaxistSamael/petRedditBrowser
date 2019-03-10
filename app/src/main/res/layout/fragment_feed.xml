@@ -6,6 +6,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
+		android:clipChildren="false"
 		>
 
 	<androidx.appcompat.widget.AppCompatTextView
@@ -29,6 +30,7 @@
 			app:layout_constraintTop_toTopOf="parent"
 			>
 
+		//todo: remove clipPadding, clipChildren if needed
 		<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/feedRv"
 				android:layout_width="match_parent"
@@ -36,6 +38,7 @@
 				android:background="@color/white"
 				android:clipToPadding="false"
 				android:gravity="center"
+				android:clipChildren="false"
 				android:orientation="vertical"
 				android:paddingBottom="@dimen/recycler_padding"
 				android:paddingTop="@dimen/recycler_padding"
