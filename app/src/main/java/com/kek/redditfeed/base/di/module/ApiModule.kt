@@ -3,7 +3,7 @@ package com.kek.redditfeed.base.di.module
 import android.app.Application
 import com.google.gson.GsonBuilder
 import com.kek.redditfeed.BuildConfig.BASE_URL
-import com.kek.redditfeed.main.feed.data.net.FeedService
+import com.kek.redditfeed.data.net.FeedService
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache

@@ -3,7 +3,10 @@ package com.kek.redditfeed.utils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,4 +26,13 @@ fun RecyclerView.doOnNextPage(call: () -> Unit, scrollOffset: Int = 4) {
       }
     }
   })
+}
+
+fun Fragment.toast(text: String, length: Int = Toast.LENGTH_SHORT) {
+  Toast.makeText(context, text, length).show()
+}
+
+fun Fragment.toast(@StringRes textRes: Int) {
+  val text = context?.getString(textRes) ?: return
+  toast(text)
 }

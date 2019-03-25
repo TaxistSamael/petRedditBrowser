@@ -11,6 +11,9 @@
 	<string name="cooldown_days">%s d</string>
 	<string name="cooldown_hours">%1$s h</string>
 	<string name="cooldown_minutes">%s m</string>
+	<string name="loading_is_started">Loading is started</string>
+	<string name="something_went_wrong">Something went wrong...</string>
+	<string name="error_permission_not_granted">Permission should be granted to complete this action</string>
 
 	<plurals name="days_plurals">
 		<item quantity="one">%d day</item>
